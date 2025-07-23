@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Radio, Maffei, Radio Maffei, JMRadio, Mid House, João Maffei Rosa, Escola ,colégio">
+    <meta name="author" content="João Maffei Rosa">
+    <meta name="description"
+        content="Está no ar... A rádio que embala o seu dia com o melhor da música, informação, entreterimento e educação.">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <title>Rádio Maffei</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org/dist/htmx.min.js"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/RadioLogo.png') }}">
+</head>
+
+<body>
+
+    <audio id="radioPlayer">
+        <source src="https://uk5freenew.listen2myradio.com/live.mp3?typeportmount=s1_33286_stream_972750901"
+     type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+
+    <div class="radio">
+        <h1>Eletiva Mídias</h1>
+        <div class="info">
+            <img class="logo" src="{{ url_for('static', filename='img/JMRadio.png') }}" alt="">
+            <p class="frase">Educação integral em sintonia total!</p>
+            <p class="fm">JMRadio.FM</p>
+        </div>
+        <div class="divplay">
+            <div class="play" onclick="play()">
+                <div id="buttonplay" class="buttonplay"></div>
+            </div>
+            <div class="volume">
+                <label id="volumeLabel" for="volumeControl"><img id="volumeImg" src="{{ url_for('static', filename='img/Volume.png') }}" alt="Volume"></label>
+                <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.2">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="divmenu">
+            <img onclick="MenuO()" id="MenuOpen" src="{{ url_for('static', filename='img/Menu.png') }}" alt="Menu">
+            <div id="menu" class="menu">
+                <a id="ativado" hx-post="/inicio" hx-target=".container">Início</a>
+                <a hx-post="/quemsomos" hx-target=".container">Quem Somos</a>
+                <a hx-post="/coordenacao" hx-target=".container">Coordenação</a>
+                <a hx-post="/programacao" hx-target=".container">Programação</a>
+                <a hx-post="/midia" hx-target=".container">Mídia</a>
+                  <a hx-post="/roteiro" hx-target=".container">Roteiro</a>
+                <a hx-post="/locucao" hx-target=".container">Locução</a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="program">
+                <div class="boxdia">
+                    <p class="dia">Domingo</p>
+                    <ul>
+                    {% for row in dom %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                    <p class="dia">Segunda</p>
+                    <ul>
+                    {% for row in seg %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                    <p class="dia">Terça</p>
+                    <ul>
+                    {% for row in ter %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                    <p class="dia">Quarta</p>
+                    <ul>
+                    {% for row in qua %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                    <p class="dia">Quinta</p>
+                    <ul>
+                    {% for row in qui %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                    <p class="dia">Sexta</p>
+                    <ul>
+                    {% for row in sex %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                    <p class="dia">Sábado</p>
+                    <ul>
+                    {% for row in sab %}
+                        <li>{{ row[3] }} - {{ row[0] }}/{{ row[1] }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+</body>
+
+</html>
